@@ -1,8 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"PwnBuddy/cmd"
+	"PwnBuddy/utils"
+	"fmt"
+
+	"github.com/c-bata/go-prompt"
+)
 
 func main() {
-	fmt.Println("Hello Buddy")
+	shell := &cmd.CMD{
+		RootCommand:        cmd.RootCmd,
+		SuggestionFunction: nil,
+		PromptOptions: []prompt.Option{
+			prompt.OptionTitle("PwnBuddy"),
+			prompt.OptionPrefix("pwnbuddy> "),
+			prompt.OptionShowCompletionAtStart(),
+			prompt.OptionMaxSuggestion(10),
+		},
+	}
 
+	fmt.Print(utils.GetAsciiString())
+
+	shell.Run()
 }
